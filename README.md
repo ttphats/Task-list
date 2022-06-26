@@ -1,7 +1,7 @@
 # Welcome to My basic Task-list web application:
 
 
-Live Demo: :point_right: [here](https://hdkthedev-portfolio.netlify.app/](https://ttphats-task-list.netlify.app/))
+Live Demo: :point_right: [here](https://ttphats-task-list.netlify.app)
 
 ### Description:
 - This applicationwas built using HTML,CSS and Javasript.
