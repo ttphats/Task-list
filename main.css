@@ -36,6 +36,16 @@ header h1 {
     margin-bottom: 1rem;
 }
 
+header h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, rgb(216, 54, 108), rgb(238, 97, 175));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 1rem 0.5rem 1rem;
+}
+
 #new-task-form {
     display: flex;
 }
