@@ -14,6 +14,7 @@ window.addEventListener('load', () => {
         for (var i = 0; i < todoList.length; i++) {
             const task_el = document.createElement("div");
             task_el.classList.add("task");
+            task_el.id = i;
 
             const task_content_el = document.createElement("div");
             task_content_el.classList.add("content");
@@ -63,8 +64,19 @@ window.addEventListener('load', () => {
                 }
             });
 
-            task_delete_el.addEventListener('click', (i) => {
+            task_delete_el.addEventListener('click', () => {
                 list_el.removeChild(task_el);
+                const arr = [];
+                console.log("id clicked: " + task_el.id);
+                for (var a = 0; a < todoList.length; a++) {
+                    arr.push(todoList[a]);
+                }
+                if (arr[task_el.id] == todoList[task_el.id]) {
+                    arr.splice(task_el.id, 1);
+                    console.log("after delete: " + arr);
+                    localStorage.removeItem(storageKey);
+                    localStorage.setItem(storageKey, JSON.stringify(arr))
+                }
             });
 
             task_empty_alert.innerText = "";
