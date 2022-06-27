@@ -54,22 +54,15 @@ window.addEventListener('load', () => {
             list_el.appendChild(task_el);
 
             input.value = "";
+
             task_edit_el.addEventListener('click', () => {
                 if (task_edit_el.innerText.toLowerCase() == "edit") {
                     task_input_el.removeAttribute("readonly");
                     task_input_el.focus();
                     task_edit_el.innerText = "Save";
                 } else {
-                    const arr = [];
-                    for (var a = 0; a < todoList.length; a++) {
-                        arr.push(todoList[a]);
-                    }
-                    arr[task_el.id] = document.getElementById("text_" + task_el.id).value;
-
-                    if (arr[task_el.id] != todoList[task_el.id]) {
-                        localStorage.removeItem(storageKey);
-                        localStorage.setItem(storageKey, JSON.stringify(arr))
-                    }
+                    todoList[task_el.id] = document.getElementById("text_" + task_el.id).value;
+                    localStorage.setItem(storageKey, JSON.stringify(todoList));
                     task_input_el.setAttribute("readonly", "readonly");
                     task_edit_el.innerText = "Edit";
                 }
@@ -152,25 +145,15 @@ window.addEventListener('load', () => {
             input.value = "";
 
             task_edit_el.addEventListener('click', () => {
-                localStorage.getItem(storageKey);
                 if (task_edit_el.innerText.toLowerCase() == "edit") {
                     task_input_el.removeAttribute("readonly");
                     task_input_el.focus();
                     task_edit_el.innerText = "Save";
                 } else {
-                    const arr = [];
-                    for (var a = 0; a < todoList.length; a++) {
-                        arr.push(todoList[a]);
-                    }
-                    arr[task_el.id] = document.getElementById("text_" + task_el.id).value;
-
-                    if (arr[task_el.id] != todoList[task_el.id]) {
-                        localStorage.removeItem(storageKey);
-                        localStorage.setItem(storageKey, JSON.stringify(arr))
-                    }
+                    todoList[task_el.id] = document.getElementById("text_" + task_el.id).value;
+                    localStorage.setItem(storageKey, JSON.stringify(todoList));
                     task_input_el.setAttribute("readonly", "readonly");
                     task_edit_el.innerText = "Edit";
-
                 }
             });
 
