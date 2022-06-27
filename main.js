@@ -27,6 +27,7 @@ window.addEventListener('load', () => {
             task_input_el.type = "text";
             task_input_el.value = todoList[i];
             task_input_el.setAttribute("readonly", "readonly");
+            task_input_el.id = "text_" + i;
 
             task_content_el.appendChild(task_input_el);
 
@@ -53,12 +54,22 @@ window.addEventListener('load', () => {
             list_el.appendChild(task_el);
 
             input.value = "";
-            task_edit_el.addEventListener('click', (i) => {
+            task_edit_el.addEventListener('click', () => {
                 if (task_edit_el.innerText.toLowerCase() == "edit") {
                     task_input_el.removeAttribute("readonly");
                     task_input_el.focus();
                     task_edit_el.innerText = "Save";
                 } else {
+                    const arr = [];
+                    for (var a = 0; a < todoList.length; a++) {
+                        arr.push(todoList[a]);
+                    }
+                    arr[task_el.id] = document.getElementById("text_" + task_el.id).value;
+
+                    if (arr[task_el.id] != todoList[task_el.id]) {
+                        localStorage.removeItem(storageKey);
+                        localStorage.setItem(storageKey, JSON.stringify(arr))
+                    }
                     task_input_el.setAttribute("readonly", "readonly");
                     task_edit_el.innerText = "Edit";
                 }
@@ -67,13 +78,11 @@ window.addEventListener('load', () => {
             task_delete_el.addEventListener('click', () => {
                 list_el.removeChild(task_el);
                 const arr = [];
-                console.log("id clicked: " + task_el.id);
                 for (var a = 0; a < todoList.length; a++) {
                     arr.push(todoList[a]);
                 }
                 if (arr[task_el.id] == todoList[task_el.id]) {
                     arr.splice(task_el.id, 1);
-                    console.log("after delete: " + arr);
                     localStorage.removeItem(storageKey);
                     localStorage.setItem(storageKey, JSON.stringify(arr))
                 }
@@ -143,26 +152,36 @@ window.addEventListener('load', () => {
             input.value = "";
 
             task_edit_el.addEventListener('click', () => {
+                localStorage.getItem(storageKey);
                 if (task_edit_el.innerText.toLowerCase() == "edit") {
                     task_input_el.removeAttribute("readonly");
                     task_input_el.focus();
                     task_edit_el.innerText = "Save";
                 } else {
+                    const arr = [];
+                    for (var a = 0; a < todoList.length; a++) {
+                        arr.push(todoList[a]);
+                    }
+                    arr[task_el.id] = document.getElementById("text_" + task_el.id).value;
+
+                    if (arr[task_el.id] != todoList[task_el.id]) {
+                        localStorage.removeItem(storageKey);
+                        localStorage.setItem(storageKey, JSON.stringify(arr))
+                    }
                     task_input_el.setAttribute("readonly", "readonly");
                     task_edit_el.innerText = "Edit";
+
                 }
             });
 
             task_delete_el.addEventListener('click', () => {
                 list_el.removeChild(task_el);
                 const arr = [];
-                console.log("id clicked: " + task_el.id);
                 for (var a = 0; a < todoList.length; a++) {
                     arr.push(todoList[a]);
                 }
                 if (arr[task_el.id] == todoList[task_el.id]) {
                     arr.splice(task_el.id, 1);
-                    console.log("after delete: " + arr);
                     localStorage.removeItem(storageKey);
                     localStorage.setItem(storageKey, JSON.stringify(arr))
                 }
